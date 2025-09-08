@@ -25,7 +25,11 @@ class ApiRequest extends BaseServices
     /** @var int 超时时间（秒） */
     protected int $timeout = 10;
 
+    /** @var int 响应成功状态码 */
     const StatusSuccess = 200;
+
+    /** @var string|null 出口 IP 或网卡名 */
+    protected ?string $interfaceIp = null;
 
     /**
      * @param array $clientConfig 传入 Guzzle 的构造参数（如 base_uri、proxy、verify 等）
@@ -80,6 +84,13 @@ class ApiRequest extends BaseServices
         return $this->logChannel;
     }
 
+    /** 设置出口 IP（或网卡名） */
+    public function setInterfaceIp(string $ipOrInterface): self
+    {
+        $this->interfaceIp = $ipOrInterface;
+        return $this;
+    }
+
     /**
      * 统一请求入口
      * @param string $method
@@ -102,6 +113,11 @@ class ApiRequest extends BaseServices
         // 默认超时
         if (!isset($options['timeout'])) {
             $options['timeout'] = $this->timeout;
+        }
+
+        // request 方法里，准备 $options 时加上：
+        if ($this->interfaceIp) {
+            $options['curl'][CURLOPT_INTERFACE] = $this->interfaceIp;
         }
 
         $this->logParams($requestId, $method, $uri, $options);
