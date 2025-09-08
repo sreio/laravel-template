@@ -19,11 +19,11 @@ class Controller extends BaseController
     /**
      * 通用分页方法 - 返回自定义数组格式
      *
-     * @param \Illuminate\Database\Eloquent\Builder|Builder $query 查询构造器
+     * @param Builder $query 查询构造器
      * @param int $defaultPageSize 默认每页条数
      * @return array
      */
-    public function paginateData(\Illuminate\Database\Eloquent\Builder|Builder $query, int $defaultPageSize = Common::PAGE_SIZE): array
+    public function paginateData(Builder $query, int $defaultPageSize = Common::PAGE_SIZE): array
     {
         // 从请求中获取页码和每页条数参数，默认为 1 和 $defaultPageSize
         $page = (int) request()->input('page', Common::PAGE);
