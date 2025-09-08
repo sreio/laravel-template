@@ -152,7 +152,7 @@ class ApiRequest extends BaseServices
                 'json'       => $json,
                 'duration_ms'=> $durationMs,
             ];
-        } catch (GuzzleException $e) {
+        } catch (GuzzleException|Exception $e) {
             $durationMs = (int) round((microtime(true) - $start) * 1000);
 
             // 异常也记录到“响应结果”日志里
@@ -170,7 +170,7 @@ class ApiRequest extends BaseServices
      * @param array $query
      * @param array $options
      * @return array
-     * @throws GuzzleException
+     * @throws GuzzleException|Exception
      */
     public function get(string $uri, array $query = [], array $options = []): array
     {
@@ -186,7 +186,7 @@ class ApiRequest extends BaseServices
      * @param array $options
      * @param bool $asJson
      * @return array
-     * @throws GuzzleException
+     * @throws GuzzleException|Exception
      */
     public function post(string $uri, array $data = [], array $options = [], bool $asJson = true): array
     {
@@ -204,7 +204,7 @@ class ApiRequest extends BaseServices
      * @param array $options
      * @param bool $asJson
      * @return array
-     * @throws GuzzleException
+     * @throws GuzzleException|Exception
      */
     public function put(string $uri, array $data = [], array $options = [], bool $asJson = true): array
     {
@@ -222,7 +222,7 @@ class ApiRequest extends BaseServices
      * @param array $options
      * @param bool $asJson
      * @return array
-     * @throws GuzzleException
+     * @throws GuzzleException|Exception
      */
     public function delete(string $uri, array $data = [], array $options = [], bool $asJson = true): array
     {
@@ -249,7 +249,7 @@ class ApiRequest extends BaseServices
      * @param array<string,mixed> $formFields 其他表单字段
      * @param array $options 其他 Guzzle 选项
      * @return array
-     * @throws GuzzleException
+     * @throws GuzzleException|Exception
      */
     public function upload(string $uri, array $files, array $formFields = [], array $options = []): array
     {
@@ -293,7 +293,7 @@ class ApiRequest extends BaseServices
      * @param array<string,mixed> $query
      * @param array $options
      * @return array
-     * @throws GuzzleException
+     * @throws GuzzleException|Exception
      */
     public function download(string $uri, string $saveTo, array $query = [], array $options = []): array
     {
