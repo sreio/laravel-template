@@ -31,6 +31,9 @@ class ApiRequest extends BaseServices
     /** @var string|null 出口 IP 或网卡名 */
     protected ?string $interfaceIp = null;
 
+    /** @var string|null 默认 base_uri */
+    protected ?string $baseUrl = null;
+
     /**
      * @param array $clientConfig 传入 Guzzle 的构造参数（如 base_uri、proxy、verify 等）
      * @param array<string,string> $defaultHeaders 统一基础 Header
@@ -91,6 +94,13 @@ class ApiRequest extends BaseServices
         return $this;
     }
 
+    /** 可链式设置 base_uri */
+    public function setBaseUrl(string $baseUrl): self
+    {
+        $this->baseUrl = $baseUrl;
+        return $this;
+    }
+
     /**
      * 统一请求入口
      * @param string $method
@@ -118,6 +128,11 @@ class ApiRequest extends BaseServices
         // request 方法里，准备 $options 时加上：
         if ($this->interfaceIp) {
             $options['curl'][CURLOPT_INTERFACE] = $this->interfaceIp;
+        }
+
+        // 设置 base_uri
+        if ($this->baseUrl) {
+            $options['base_uri'] = $this->baseUrl;
         }
 
         $this->logParams($requestId, $method, $uri, $options);
