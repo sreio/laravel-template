@@ -15,6 +15,9 @@ composer install
 cp .env.example .env
 composer install --optimize-autoloader --no-dev
 
+chmod -R 775 storage
+chmod -R 775 bootstrap/cache
+
 ## [线上] 优化
 php artisan optimize
 # 或者分别执行
