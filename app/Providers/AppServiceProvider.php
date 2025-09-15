@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // 定义sql宏
+        Builder::macro('sql', function () {
+            return array_reduce($this->getBindings(), function ($sql, $binding) {
+                return preg_replace('/\?/', is_numeric($binding) ? $binding : "'" . $binding . "'", $sql, 1);
+            }, $this->toSql());
+        });
+        // Eloquent ORM
+        \Illuminate\Database\Eloquent\Builder::macro('sql', function () {
+            return ($this->getQuery()->sql());
+        });
     }
 
     /**
