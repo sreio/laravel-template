@@ -37,4 +37,4 @@ php artisan view:cache
   - 修改时区为 `Asia/Shanghai`
 
 ## package
-- [laravel-admin](https://github.com/laravel-admin-extensions/laravel-admin)
+- [jiannei/laravel-response](https://github.com/jiannei/laravel-response)
