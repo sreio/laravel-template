@@ -16,4 +16,14 @@ class Common
 
     public const PAGE_SIZE_MAX = 100;
 
+    /**
+     * 登录、密码找回输入错误次数
+     */
+    const INPUT_ERROR_NUM = 5;
+
+    /**
+     * 登录、密码找回输入错误锁定秒数
+     */
+    const INPUT_LOCK_TIME = 1800;
+
 }

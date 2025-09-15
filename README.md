@@ -14,6 +14,8 @@ composer install
 # 生产环境
 cp .env.example .env
 composer install --optimize-autoloader --no-dev
+# 使用JWT时请生成密钥
+php artisan jwt:secret
 
 chmod -R 775 storage
 chmod -R 775 bootstrap/cache
@@ -39,5 +41,11 @@ php artisan view:cache
 - 配置文件
   - 修改时区为 `Asia/Shanghai`
 
-## package
+## JWT
+
+### 用户表
+- [SQL：admin_users](database/sql/admin_users.sql)
+
+## packages
 - [jiannei/laravel-response](https://github.com/jiannei/laravel-response)
+- [tymon/jwt-auth](https://github.com/tymondesigns/jwt-auth)
