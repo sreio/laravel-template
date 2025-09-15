@@ -27,7 +27,7 @@ php artisan view:cache
 
 - [API响应格式调整](app/Http/Controllers/Api/IndexController.php)
 - [统一请求处理](app/Services/ApiRequest.php)
-- [route生成协议调整](app/Providers/AppServiceProvider.php:34)
+- [定义SQL宏&route生成协议调整](app/Providers/AppServiceProvider.php:34)
 - 公共定义参数
   - [公共参数](app/Constant/Common.php)
   - [缓存参数](app/Constant/CommonCache.php)
